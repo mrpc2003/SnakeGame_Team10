@@ -589,7 +589,14 @@ void Game::handleGameOver()
             mvprintw(term_rows/2-1, (term_cols-12)/2, "Game Over!");
             mvprintw(term_rows/2, (term_cols-15)/2, "Stage: %d", currentStage);
             if (!gameOverReason.empty()) {
-                mvprintw(term_rows/2+1, (term_cols-20)/2, "Reason: %.15s", gameOverReason.c_str());
+                // 작은 터미널에서 메시지가 넘어가지 않도록 동적으로 길이 조정
+                int max_reason_len = term_cols - 12; // "Reason: " + 여백
+                if (max_reason_len < 5) max_reason_len = 5; // 최소 길이 보장
+                std::string short_reason = gameOverReason.substr(0, static_cast<size_t>(max_reason_len));
+                if (gameOverReason.length() > static_cast<size_t>(max_reason_len)) {
+                    short_reason = short_reason.substr(0, static_cast<size_t>(max_reason_len-3)) + "...";
+                }
+                mvprintw(term_rows/2+1, (term_cols-(8+short_reason.length()))/2, "Reason: %s", short_reason.c_str());
             }
             mvprintw(term_rows/2+2, (term_cols-15)/2, "R:retry E:exit");
             refresh();
@@ -610,7 +617,6 @@ void Game::handleGameOver()
         }
         
         // 기존 코드 (터미널이 충분히 큰 경우)
-        int reason_max_width = 22;
         std::string reason = gameOverReason;
         
         // 게임 오버 이유가 없으면 기본 메시지 사용
@@ -618,27 +624,44 @@ void Game::handleGameOver()
             reason = "Unknown error occurred.";
         }
         
+        // 윈도우 크기를 먼저 계산하여 reason_max_width를 동적으로 설정
+        int min_width = 27;
+        int max_possible_width = term_cols - 6; // 터미널 양쪽 여백 고려
+        int initial_win_width = std::max(min_width, max_possible_width);
+        if (initial_win_width > term_cols - 2) initial_win_width = term_cols - 2;
+        
+        // 실제 사용 가능한 텍스트 영역 계산 (박스 테두리와 여백 고려)
+        int text_area_width = initial_win_width - 8; // 양쪽 여백 4씩
+        if (text_area_width < 15) text_area_width = 15; // 최소 텍스트 영역 보장
+        
+        int reason_max_width = text_area_width;
+        
         std::vector<std::string> reason_lines;
         std::string prefix = "Reason: ";
         size_t prefix_len = prefix.length();
         size_t pos = 0;
+        
         if (reason.length() <= reason_max_width - prefix_len) {
             reason_lines.push_back(reason);
         } else {
             reason_lines.push_back(reason.substr(0, reason_max_width - prefix_len));
             pos = reason_max_width - prefix_len;
             while (pos < reason.length()) {
-                reason_lines.push_back(reason.substr(pos, reason_max_width));
-                pos += reason_max_width;
+                size_t remaining = reason.length() - pos;
+                size_t chunk_size = std::min(remaining, (size_t)reason_max_width);
+                reason_lines.push_back(reason.substr(pos, chunk_size));
+                pos += chunk_size;
             }
         }
-        size_t max_line_len = 0;
+        
+        // 실제 필요한 윈도우 크기 재계산
+        size_t max_line_len = prefix_len; // "Reason: " 접두사 길이로 시작
         for (const auto& line : reason_lines) {
-            size_t len = line.length();
-            if (max_line_len < len) max_line_len = len;
+            size_t total_len = (line == reason_lines[0]) ? prefix_len + line.length() : 8 + line.length(); // 8은 들여쓰기 "        "
+            if (max_line_len < total_len) max_line_len = total_len;
         }
-        int min_width = 27;
-        int win_width = std::max(min_width, (int)max_line_len + 10);
+        
+        int win_width = std::max(min_width, (int)max_line_len + 8); // 양쪽 여백 4씩
         if (win_width > term_cols - 2) win_width = term_cols - 2;
         // 세로 크기: 위여백(2) + 제목(1) + 여백(1) + 스테이지(1) + 여백(1) + Reason(줄수) + 여백(1) + 점수(1) + 여백(1) + 안내문구(2) + 아래여백(1)
         int win_height = 2 + 1 + 1 + 1 + 1 + (int)reason_lines.size() + 1 + 1 + 1 + 2 + 1;
