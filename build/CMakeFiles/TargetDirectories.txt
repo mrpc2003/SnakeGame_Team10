@@ -1,0 +1,7 @@
+/Users/mrpc2003/Desktop/2학년/1학기/c++/snake project/snakeGame/build/CMakeFiles/SnakeGame.dir
+/Users/mrpc2003/Desktop/2학년/1학기/c++/snake project/snakeGame/build/CMakeFiles/edit_cache.dir
+/Users/mrpc2003/Desktop/2학년/1학기/c++/snake project/snakeGame/build/CMakeFiles/rebuild_cache.dir
+/Users/mrpc2003/Desktop/2학년/1학기/c++/snake project/snakeGame/build/CMakeFiles/list_install_components.dir
+/Users/mrpc2003/Desktop/2학년/1학기/c++/snake project/snakeGame/build/CMakeFiles/install.dir
+/Users/mrpc2003/Desktop/2학년/1학기/c++/snake project/snakeGame/build/CMakeFiles/install/local.dir
+/Users/mrpc2003/Desktop/2학년/1학기/c++/snake project/snakeGame/build/CMakeFiles/install/strip.dir

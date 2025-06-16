@@ -1,0 +1,61 @@
+{
+	"configurations" : 
+	[
+		{
+			"directories" : 
+			[
+				{
+					"build" : ".",
+					"hasInstallRule" : true,
+					"jsonFile" : "directory-.-Debug-bac2ec52554cfd6e86d7.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.12"
+					},
+					"projectIndex" : 0,
+					"source" : ".",
+					"targetIndexes" : 
+					[
+						0
+					]
+				}
+			],
+			"name" : "Debug",
+			"projects" : 
+			[
+				{
+					"directoryIndexes" : 
+					[
+						0
+					],
+					"name" : "SnakeGame",
+					"targetIndexes" : 
+					[
+						0
+					]
+				}
+			],
+			"targets" : 
+			[
+				{
+					"directoryIndex" : 0,
+					"id" : "SnakeGame::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-SnakeGame-Debug-17bcd9fa2d147f87ffde.json",
+					"name" : "SnakeGame",
+					"projectIndex" : 0
+				}
+			]
+		}
+	],
+	"kind" : "codemodel",
+	"paths" : 
+	{
+		"build" : "/Users/mrpc2003/Desktop/2\u1112\u1161\u11a8\u1102\u1167\u11ab/1\u1112\u1161\u11a8\u1100\u1175/c++/snake project/snakeGame/build",
+		"source" : "/Users/mrpc2003/Desktop/2\u1112\u1161\u11a8\u1102\u1167\u11ab/1\u1112\u1161\u11a8\u1100\u1175/c++/snake project/snakeGame"
+	},
+	"version" : 
+	{
+		"major" : 2,
+		"minor" : 8
+	}
+}

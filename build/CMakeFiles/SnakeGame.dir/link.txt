@@ -1,0 +1,1 @@
+/usr/bin/clang++  -Wall -Wextra -g -arch arm64 -Wl,-search_paths_first -Wl,-headerpad_max_install_names CMakeFiles/SnakeGame.dir/src/main.cpp.o -o SnakeGame  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/lib/libcurses.tbd /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/lib/libform.tbd
