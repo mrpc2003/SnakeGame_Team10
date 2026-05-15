@@ -1,0 +1,40 @@
+# OS metadata
+.DS_Store
+Thumbs.db
+
+# Editor and IDE metadata
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# C/C++ build outputs
+bin/
+build/
+obj/
+out/
+cmake-build-*/
+CMakeFiles/
+CMakeCache.txt
+cmake_install.cmake
+compile_commands.json
+Makefile.user
+
+# Compiled objects and binaries
+*.o
+*.obj
+*.a
+*.lib
+*.so
+*.dylib
+*.dll
+*.exe
+*.out
+*.app/
+
+# Debug and generated files
+*.dSYM/
+*.gcda
+*.gcno
+*.gcov
